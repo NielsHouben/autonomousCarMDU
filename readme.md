@@ -1,0 +1,2 @@
+get finger print from devtools when connecting to broker over secure websocket.
+from [https://community.hivemq.com/t/arduino-example-with-server-signed-certificate/502/2](https://community.hivemq.com/t/arduino-example-with-server-signed-certificate/502/2)
