@@ -4,6 +4,7 @@
 
 #define LEFT 5  // D1
 #define RIGHT 4 // D2
+#define LEFT_DIRECTION 0
 
 const char *ssid = "ABBgym_2.4";
 const char *password = "mittwifiarsabra";
@@ -19,7 +20,7 @@ unsigned long lastMsg = 0;
 char msg[MSG_BUFFER_SIZE];
 int value = 0;
 
-int power = 600;
+int power = 400;
 int leftPower = 0;
 int rightPower = 0;
 
@@ -55,6 +56,7 @@ void callback(char *topic, byte *payload, unsigned int length)
 {
   String topicString((char *)topic);
   String message = "";
+  Serial.println(topicString);
   for (unsigned int i = 0; i < length; i++)
   {
     // Serial.print((char)payload[i]);
@@ -90,6 +92,17 @@ void callback(char *topic, byte *payload, unsigned int length)
     rightPower = power * factor;
     Serial.println(leftPower);
     analogWrite(RIGHT, rightPower);
+  }
+  else if (topicString == "/NHSI/speed")
+  {
+    Serial.print("speed: ");
+    Serial.println(message);
+
+    // float factor = message.toFloat();
+    // rightPower = power * factor;
+    power = message.toInt();
+    Serial.println(power);
+    // analogWrite(RIGHT, rightPower);
   }
   else
   {
